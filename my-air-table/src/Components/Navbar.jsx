@@ -1,30 +1,17 @@
-import { ReactNode } from "react";
 import {
   Box,
   Flex,
-  Avatar,
   Link,
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
   useDisclosure,
   useColorModeValue,
-  Stack,
   useColorMode,
-  Center,
-  Text,
   Heading,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
 } from "@chakra-ui/react";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { BsCart4 } from "react-icons/bs";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Link as RouterLink } from "react-router-dom";
+import Sidebar from "./Sidebar";
+import { Popover, PopoverTrigger, PopoverContent } from "@chakra-ui/react";
 
 const NavLink = ({ children }) => (
   <Link
@@ -57,8 +44,13 @@ export default function Navbar() {
         <p>
           See how new Airtable features can improve your work in our latest
           webinar
-          <Button bg="#f0f6ff" color={"blue.500"}>
-            <b color="blue">View webinar -</b>
+          <Button
+            rightIcon={<ArrowForwardIcon />}
+            colorScheme="blue"
+            variant="ghost"
+            fontSize={"14px"}
+          >
+            View webinar
           </Button>
         </p>
       </Box>
@@ -77,7 +69,7 @@ export default function Navbar() {
           border={"1px solid red"}
         >
           <Flex>
-            <Box mr={"5px"}>
+            <Box mr={"5px"} ml="30px">
               <img
                 src="http://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/airplane.png"
                 alt="xyz"
@@ -87,36 +79,62 @@ export default function Navbar() {
             <Heading ml={"10px"} mt={"9px"} fontSize={"20px"}>
               My Airtable App
             </Heading>
-            <Box ml={"25px"} mt={"5px"}>
-              <Breadcrumb spacing="8px" separator=">">
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="#">
-                    <b>Product</b>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
+            <Box ml={"25px"} mt={"10px"}>
+              <Popover>
+                <PopoverTrigger>
+                  <Link
+                    p={2}
+                    fontSize={"16px"}
+                    fontWeight="bold"
+                    mr={"5"}
+                    onClick={onOpen}
+                  >
+                    Products {">"}
+                  </Link>
+                </PopoverTrigger>
+                <PopoverTrigger>
+                  <Link
+                    p={2}
+                    fontSize={"16px"}
+                    fontWeight="bold"
+                    mr={"5"}
+                    onClick={onOpen}
+                  >
+                    Solutions {"> "}
+                  </Link>
+                </PopoverTrigger>
 
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="#">
-                    <b>Solutions</b>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
+                <Link p={2} fontSize={"16px"} fontWeight="bold" mr={"5"}>
+                  Pricing
+                </Link>
 
-                <Button colorScheme="blue" color="black" variant="ghost">
-                  <b>Pricing</b>
-                </Button>
+                <PopoverTrigger>
+                  <Link
+                    p={2}
+                    fontSize={"16px"}
+                    fontWeight="bold"
+                    mr={"5"}
+                    onClick={onOpen}
+                  >
+                    Enterprise {"> "}
+                  </Link>
+                </PopoverTrigger>
+                <PopoverTrigger>
+                  <Link
+                    p={2}
+                    fontSize={"16px"}
+                    fontWeight="bold"
+                    mr={"5"}
+                    onClick={onOpen}
+                  >
+                    Resourses {"> "}
+                  </Link>
+                </PopoverTrigger>
 
-                <BreadcrumbItem isCurrentPage>
-                  <BreadcrumbLink href="#">
-                    <b>Enterprise</b>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbItem isCurrentPage>
-                  <BreadcrumbLink href="#">
-                    <b>Resources</b>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-              </Breadcrumb>
+                <PopoverContent>
+                  <Sidebar isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+                </PopoverContent>
+              </Popover>
             </Box>
           </Flex>
 
