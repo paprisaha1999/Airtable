@@ -7,6 +7,7 @@ import {
   useColorModeValue,
   useColorMode,
   Heading,
+  Container,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Link as RouterLink } from "react-router-dom";
@@ -32,7 +33,7 @@ export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <>
+    <div style={{ width: "100%", margin: "auto", position: "sticky", top: 0 }}>
       <Box
         width={"100%"}
         height={"50px"}
@@ -54,11 +55,13 @@ export default function Navbar() {
           </Button>
         </p>
       </Box>
+
       <Box
         bg={useColorModeValue("white", "gray.900")}
         px={4}
-        height={"80px"}
-        width={"100%"}
+        height={"auto"}
+        width={"87%"}
+        margin={"auto"}
       >
         <Flex
           alignItems="center"
@@ -73,12 +76,14 @@ export default function Navbar() {
               <img
                 src="http://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/airplane.png"
                 alt="xyz"
-                width="50px"
+                width="40px"
               />
             </Box>
-            <Heading ml={"10px"} mt={"9px"} fontSize={"20px"}>
-              My Airtable App
-            </Heading>
+            <RouterLink to="/">
+              <Heading ml={"10px"} mt={"9px"} fontSize={"20px"}>
+                My Airtable App
+              </Heading>
+            </RouterLink>
             <Box ml={"25px"} mt={"10px"}>
               <Popover>
                 <PopoverTrigger>
@@ -104,9 +109,15 @@ export default function Navbar() {
                   </Link>
                 </PopoverTrigger>
 
-                <Link p={2} fontSize={"16px"} fontWeight="bold" mr={"5"}>
-                  Pricing
-                </Link>
+                <RouterLink
+                  to="/price"
+                  p={2}
+                  fontSize={"16px"}
+                  fontWeight="bold"
+                  mr={"10"}
+                >
+                  <b>Pricing</b>{" "}
+                </RouterLink>
 
                 <PopoverTrigger>
                   <Link
@@ -116,6 +127,7 @@ export default function Navbar() {
                     mr={"5"}
                     onClick={onOpen}
                   >
+                    {" "}
                     Enterprise {"> "}
                   </Link>
                 </PopoverTrigger>
@@ -145,7 +157,7 @@ export default function Navbar() {
               </Button>
             </RouterLink>
 
-            <RouterLink>
+            <RouterLink to="/signup">
               <Button colorScheme="blue" variant="solid">
                 Sign up for free
               </Button>
@@ -159,6 +171,6 @@ export default function Navbar() {
           </Flex>
         </Flex>
       </Box>
-    </>
+    </div>
   );
 }
