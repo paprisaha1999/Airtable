@@ -33,7 +33,7 @@ export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <div style={{ width: "100%", margin: "auto", position: "sticky", top: 0 }}>
+    <div style={{ width: "100%", margin: "auto", position: "sticky", top: 0, zIndex:"10" }}>
       <Box
         width={"100%"}
         height={"50px"}
@@ -163,7 +163,7 @@ export default function Navbar() {
               </Button>
             </RouterLink>
 
-            <RouterLink>
+            <RouterLink to="/login">
               <Button colorScheme="blue" color="black" variant="ghost">
                 Sign in
               </Button>

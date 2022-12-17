@@ -51,6 +51,7 @@ export default function Footer() {
         px={4}
         height={"80px"}
         width={"100%"}
+        mt={"20px"}
       >
         <Flex
           alignItems="center"
