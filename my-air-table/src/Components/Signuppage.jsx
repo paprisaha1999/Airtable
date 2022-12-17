@@ -18,12 +18,14 @@ import {
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 // import TimeTable from "../images/TimeTable.jpg";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupCard() {
   const [Password, setPassword] = useState("");
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
   const [load, setload] = useState(false);
+  const navigate = useNavigate();
 
   const postdata = async () => {
     setload(true);
@@ -42,10 +44,10 @@ export default function SignupCard() {
       let data = await res.json();
       console.log(data);
       setload(false);
-      alert("signed up successfully");
+      alert("Signup Successfull!");
+      navigate("/login");
     } catch (error) {
       setload(false);
-
       console.log(error);
     }
 
@@ -55,25 +57,36 @@ export default function SignupCard() {
   };
 
   return (
-    <Flex bg={"white"} justifyContent={"center"} alignItems={"center"}>
+    <Flex
+      bg={"rgb(247,250,252)"}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-        {/* <Image
-          width="10%"
-          margin="auto"
-          objectFit="cover"
-          src={
-            "http://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/airplane.png"
-          }
-          alt="XYZ"
-        /> */}
-        <Stack align={"center"}>
-          <Heading mt={"-20px"} fontSize={"3xl"} textAlign={"center"}>
-            Sign up
+        <Flex m={"auto"}>
+          <Box mr={"5px"} ml="30px">
+            <img
+              src="http://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/airplane.png"
+              alt="xyz"
+              width="40px"
+            />
+          </Box>
+          <Heading ml={"10px"} mt={"9px"} fontSize={"20px"}>
+            My Airtable App
           </Heading>
-          <Text fontSize={"lg"} color={"gray.600"}>
-            to enjoy all of our cool features ✌️
-          </Text>
+        </Flex>
+
+        <Stack align={"center"}>
+          <Heading
+            mt={"-20px"}
+            fontSize={"3xl"}
+            fontWeight={"400"}
+            textAlign={"center"}
+          >
+            Create your free account
+          </Heading>
         </Stack>
+
         <Box
           rounded={"lg"}
           bg={useColorModeValue("white", "gray.700")}
@@ -103,7 +116,7 @@ export default function SignupCard() {
                 </Box> */}
             </HStack>
             <FormControl id="email" isRequired>
-              <FormLabel>Email address</FormLabel>
+              <FormLabel>Work Email</FormLabel>
               <Input
                 value={email}
                 onChange={(e) => setemail(e.target.value)}
@@ -151,7 +164,10 @@ export default function SignupCard() {
             </Stack>
             <Stack pt={6}>
               <Text align={"center"}>
-                Already a user? <Link color={"blue.400"}>Login</Link>
+                Already a user?{" "}
+                <Link color={"blue.400"} to="/login">
+                  Login
+                </Link>
               </Text>
             </Stack>
           </Stack>

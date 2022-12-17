@@ -2,7 +2,7 @@ import { CheckIcon, StarIcon } from "@chakra-ui/icons";
 import { Button } from "@chakra-ui/react";
 export default function PriceTable() {
   return (
-    <div style={{ marginTop: "140px" }}>
+    <div className="pricetable" style={{ marginTop: "140px" }}>
       <table>
         <thead>
           <tr>

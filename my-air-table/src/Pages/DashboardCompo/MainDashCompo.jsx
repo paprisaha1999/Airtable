@@ -49,7 +49,7 @@ const MainDashCompo = () => {
         spacing={4}
         templateColumns="repeat(auto-fill, minmax(230px, 1fr))"
       >
-        <RouterLink>
+        <RouterLink to="/todotable">
           <Card border={"1px solid RGBA(0, 0, 0, 0.24)"}>
             <CardHeader>
               <Heading size="md">
