@@ -9,10 +9,38 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/select";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import DashboardTable from "./DashboardTable";
 
 const MainDashCompo = () => {
+  const [Data, setData] = useState([]);
+
+  useEffect(() => {
+    login();
+  }, []);
+
+  // let data;
+  const login = async () => {
+    try {
+      let res = await fetch(`http://localhost:8080/posts`);
+      let data = await res.json();
+      setData(data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // console.log(Data);
+
+  // const handleDelete = (id) => {
+  //   console.log(id);
+  //   const todoAfterDeletion = Data.filter((todos) => {
+  //     return todos.id !== id;
+  //   });
+  //   setData(todoAfterDeletion);
+  // };
+
   return (
     <div style={{ width: "130%" }}>
       <Container
@@ -25,6 +53,12 @@ const MainDashCompo = () => {
           ⭐ Invite your friends and coworkers to earn account credit!
         </Text>
       </Container>
+
+      <Flex>
+        {Data.map((item) => (
+          <DashboardTable key={item.id} {...item} />
+        ))}
+      </Flex>
 
       <Flex mt={"40px"}>
         <Heading fontSize="3xl" fontFamily="GT Eesti Display">

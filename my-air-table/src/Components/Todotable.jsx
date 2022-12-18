@@ -28,13 +28,16 @@ import {
 } from "@chakra-ui/icons";
 import TodoSidebar from "./TodoSidebar";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Todotable() {
-  const [todo, setTodo] = useState([]);
+  // const [todo, setTodo] = useState([]);
   const [name, setName] = useState("");
   const [notes, setNotes] = useState("");
   const [assignee, setAssignee] = useState("");
   const [select, setSelect] = useState("");
+  // const navigate = useNavigate();
+  // const { name, isAuth, logoutUser } = useContext(AuthContext);
 
   const showText = (event) => {
     setName(event.target.value);
@@ -49,22 +52,44 @@ export default function Todotable() {
     setSelect(event.target.value);
   };
 
-  const handleAdd = () => {
-    const newTodo = {
-      name: name,
-      notes: notes,
-      assignee: assignee,
-      select: select,
-      status: false,
-      id: Math.random() + Date.now().toLocaleString() + name,
-    };
-    setTodo([...todo, newTodo]);
-    setName("");
-    setAssignee("");
-    setNotes("");
-    setSelect("");
+  // const handleAdd = () => {
+  //   const newTodo = {
+  //     name: name,
+  //     notes: notes,
+  //     assignee: assignee,
+  //     select: select,
+  //     status: false,
+  //     id: Math.random() + Date.now().toLocaleString() + name,
+  //   };
+  //   setTodo([...todo, newTodo]);
+  //   setName("");
+  //   setAssignee("");
+  //   setNotes("");
+  //   setSelect("");
+  // };
+  // console.log(todo);
+
+  const postdata = async () => {
+    try {
+      let res = await fetch(`http://localhost:8080/posts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          notes: notes,
+          assignee: assignee,
+          select: select,
+          status: false,
+        }),
+      });
+      let data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
-  console.log(todo);
 
   return (
     <>
@@ -123,14 +148,6 @@ export default function Todotable() {
           <Button bgColor={"#white"} color="#2B6CB0">
             <BellIcon boxSize={"20px"} />
           </Button>
-          <Button
-            bgColor={"#C53030"}
-            color="white"
-            fontSize={"23px"}
-            rounded={"50%"}
-          >
-            P
-          </Button>
         </HStack>
       </Flex>
 
@@ -159,208 +176,236 @@ export default function Todotable() {
         <Box>Share View</Box>
       </HStack>
 
-      <TableContainer style={{ padding: 20, margin: 0, ml: "20px" }}>
-        <Table style={{ borderCollapse: "collapse", width: "60%", ml: "20px" }}>
-          <Thead>
-            <Tr style={{ padding: 0, margin: 0 }}>
-              <Th
-                style={{
-                  padding: 0,
-                  margin: 0,
-                  width: "50px",
-                }}
-              >
-                No.
-              </Th>
-              <Th style={{ padding: 0, margin: 0 }}>🅰️ Name</Th>
-              <Th style={{ padding: 0, margin: 0 }}>📝 Notes</Th>
-              <Th style={{ padding: 0, margin: 0 }}>🙋🏻 Assignee</Th>
-              <Th style={{ padding: 0, margin: 0 }}>❓ Status</Th>
-            </Tr>
-          </Thead>
+      <Flex>
+        <div style={{ width: "100%" }}>
+          <TableContainer
+            style={{
+              padding: 20,
+              margin: 0,
+              ml: "20px",
+              width: "100%",
+              // border: "1px solid red",
+            }}
+          >
+            <Table
+              style={{ borderCollapse: "collapse", width: "90%", ml: "20px" }}
+            >
+              <Thead>
+                <Tr style={{ padding: 0, margin: 0 }}>
+                  <Th
+                    style={{
+                      padding: 0,
+                      margin: 0,
+                      width: "50px",
+                    }}
+                  >
+                    No.
+                  </Th>
+                  <Th style={{ padding: 0, margin: 0, width: "24%" }}>
+                    🅰️ Name
+                  </Th>
+                  <Th style={{ padding: 0, margin: 0, width: "24%" }}>
+                    📝 Notes
+                  </Th>
+                  <Th style={{ padding: 0, margin: 0, width: "24%" }}>
+                    🙋🏻 Assignee
+                  </Th>
+                  <Th style={{ padding: 0, margin: 0, width: "24%" }}>
+                    ❓ Status
+                  </Th>
+                </Tr>
+              </Thead>
 
-          <Tbody>
-            <Tr style={{ columnGap: "none", padding: 0, margin: 0 }}>
-              <Td style={{ padding: 0, margin: 0 }}>1</Td>
+              <Tbody>
+                <Tr style={{ columnGap: "none", padding: 0, margin: 0 }}>
+                  <Td style={{ padding: 0, margin: 0 }}>1</Td>
 
-              <Td style={{ padding: 0, margin: 0 }}>
-                <Input
-                  style={{
-                    borderRadius: 0,
-                    width: "100%",
-                    padding: 0,
-                    margin: 0,
-                  }}
-                  type="text"
-                  placeholder="add name"
-                  value={name}
-                  onChange={showText}
-                ></Input>
-              </Td>
-              <Td style={{ padding: 0, margin: 0 }}>
-                <Input
-                  style={{ borderRadius: 0, padding: 0, margin: 0 }}
-                  type="text"
-                  placeholder="add notes"
-                  value={notes}
-                  onChange={showNotes}
-                ></Input>
-              </Td>
-              <Td style={{ padding: 0, margin: 0 }}>
-                <Input
-                  style={{ borderRadius: 0, padding: 0, margin: 0 }}
-                  type="text"
-                  placeholder="add assignee"
-                  value={assignee}
-                  onChange={showAssignee}
-                ></Input>
-              </Td>
+                  <Td style={{ padding: 0, margin: 0 }}>
+                    <Input
+                      style={{
+                        borderRadius: 0,
+                        width: "100%",
+                        padding: 0,
+                        margin: 0,
+                      }}
+                      type="text"
+                      placeholder="add name"
+                      value={name}
+                      onChange={showText}
+                    ></Input>
+                  </Td>
+                  <Td style={{ padding: 0, margin: 0 }}>
+                    <Input
+                      style={{ borderRadius: 0, padding: 0, margin: 0 }}
+                      type="text"
+                      placeholder="add notes"
+                      value={notes}
+                      onChange={showNotes}
+                    ></Input>
+                  </Td>
+                  <Td style={{ padding: 0, margin: 0 }}>
+                    <Input
+                      style={{ borderRadius: 0, padding: 0, margin: 0 }}
+                      type="text"
+                      placeholder="add assignee"
+                      value={assignee}
+                      onChange={showAssignee}
+                    ></Input>
+                  </Td>
 
-              <Td style={{ padding: 0, margin: 0 }}>
-                <select
-                  style={{ width: "100%", height: "100%", border: "none" }}
-                  value={select}
-                  onChange={showSelect}
-                >
-                  <option value="Not started">Not started</option>
-                  <option value="In progress">In progress</option>
-                </select>
-              </Td>
-            </Tr>
+                  <Td style={{ padding: 0, margin: 0 }}>
+                    <select
+                      style={{ width: "100%", height: "100%", border: "none" }}
+                      value={select}
+                      onChange={showSelect}
+                    >
+                      <option value="Not started">Not started</option>
+                      <option value="In progress">In progress</option>
+                      <option value="Completed">Completed</option>
+                    </select>
+                  </Td>
+                </Tr>
 
-            <Tr style={{ columnGap: "none", padding: 0, margin: 0 }}>
-              <Td style={{ padding: 0, margin: 0, w: "10px" }}>2</Td>
+                <Tr style={{ columnGap: "none", padding: 0, margin: 0 }}>
+                  <Td style={{ padding: 0, margin: 0, w: "10px" }}>2</Td>
 
-              <Td style={{ padding: 0, margin: 0 }}>
-                <Input
-                  style={{
-                    borderRadius: 0,
-                    width: "100%",
-                    padding: 0,
-                    margin: 0,
-                  }}
-                  placeholder="add name"
-                ></Input>
-              </Td>
+                  <Td style={{ padding: 0, margin: 0 }}>
+                    <Input
+                      style={{
+                        borderRadius: 0,
+                        width: "100%",
+                        padding: 0,
+                        margin: 0,
+                      }}
+                      placeholder="add name"
+                    ></Input>
+                  </Td>
 
-              <Td style={{ padding: 0, margin: 0 }}>
-                <Input
-                  style={{ borderRadius: 0, padding: 0, margin: 0 }}
-                  placeholder="add notes"
-                ></Input>
-              </Td>
+                  <Td style={{ padding: 0, margin: 0 }}>
+                    <Input
+                      style={{ borderRadius: 0, padding: 0, margin: 0 }}
+                      placeholder="add notes"
+                    ></Input>
+                  </Td>
 
-              <Td style={{ padding: 0, margin: 0 }}>
-                <Input
-                  style={{ borderRadius: 0, padding: 0, margin: 0 }}
-                  placeholder="add assignee"
-                ></Input>
-              </Td>
+                  <Td style={{ padding: 0, margin: 0 }}>
+                    <Input
+                      style={{ borderRadius: 0, padding: 0, margin: 0 }}
+                      placeholder="add assignee"
+                    ></Input>
+                  </Td>
 
-              <Td style={{ padding: 0, margin: 0 }}>
-                <select
-                  style={{ width: "100%", height: "100%", border: "none" }}
-                >
-                  <option value="Not started">Not started</option>
-                  <option value="In progress">In progress</option>
-                </select>
-              </Td>
-            </Tr>
+                  <Td style={{ padding: 0, margin: 0 }}>
+                    <select
+                      style={{ width: "100%", height: "100%", border: "none" }}
+                    >
+                      <option value="Not started">Not started</option>
+                      <option value="In progress">In progress</option>
+                      <option value="Completed">Completed</option>
+                    </select>
+                  </Td>
+                </Tr>
 
-            <Tr style={{ columnGap: "none", padding: 0, margin: 0 }}>
-              <Td style={{ padding: 0, margin: 0, w: "10px" }}>3</Td>
+                <Tr style={{ columnGap: "none", padding: 0, margin: 0 }}>
+                  <Td style={{ padding: 0, margin: 0, w: "10px" }}>3</Td>
 
-              <Td style={{ padding: 0, margin: 0 }}>
-                <Input
-                  style={{
-                    borderRadius: 0,
-                    width: "100%",
-                    padding: 0,
-                    margin: 0,
-                  }}
-                  placeholder="add name"
-                ></Input>
-              </Td>
+                  <Td style={{ padding: 0, margin: 0 }}>
+                    <Input
+                      style={{
+                        borderRadius: 0,
+                        width: "100%",
+                        padding: 0,
+                        margin: 0,
+                      }}
+                      placeholder="add name"
+                    ></Input>
+                  </Td>
 
-              <Td style={{ padding: 0, margin: 0 }}>
-                <Input
-                  style={{ borderRadius: 0, padding: 0, margin: 0 }}
-                  placeholder="add notes"
-                ></Input>
-              </Td>
+                  <Td style={{ padding: 0, margin: 0 }}>
+                    <Input
+                      style={{ borderRadius: 0, padding: 0, margin: 0 }}
+                      placeholder="add notes"
+                    ></Input>
+                  </Td>
 
-              <Td style={{ padding: 0, margin: 0 }}>
-                <Input
-                  style={{ borderRadius: 0, padding: 0, margin: 0 }}
-                  placeholder="add assignee"
-                ></Input>
-              </Td>
+                  <Td style={{ padding: 0, margin: 0 }}>
+                    <Input
+                      style={{ borderRadius: 0, padding: 0, margin: 0 }}
+                      placeholder="add assignee"
+                    ></Input>
+                  </Td>
 
-              <Td style={{ padding: 0, margin: 0 }}>
-                <select
-                  style={{ width: "100%", height: "100%", border: "none" }}
-                >
-                  <option value="Not started">Not started</option>
-                  <option value="In progress">In progress</option>
-                </select>
-              </Td>
-            </Tr>
+                  <Td style={{ padding: 0, margin: 0 }}>
+                    <select
+                      style={{ width: "100%", height: "100%", border: "none" }}
+                    >
+                      <option value="Not started">Not started</option>
+                      <option value="In progress">In progress</option>
+                      <option value="Completed">Completed</option>
+                    </select>
+                  </Td>
+                </Tr>
 
-            <Tr style={{ columnGap: "none", padding: 0, margin: 0 }}>
-              <Td style={{ padding: 0, margin: 0, w: "10px" }}>4</Td>
+                <Tr style={{ columnGap: "none", padding: 0, margin: 0 }}>
+                  <Td style={{ padding: 0, margin: 0, w: "10px" }}>4</Td>
 
-              <Td style={{ padding: 0, margin: 0 }}>
-                <Input
-                  style={{
-                    borderRadius: 0,
-                    width: "100%",
-                    padding: 0,
-                    margin: 0,
-                  }}
-                  placeholder="add name"
-                ></Input>
-              </Td>
+                  <Td style={{ padding: 0, margin: 0 }}>
+                    <Input
+                      style={{
+                        borderRadius: 0,
+                        width: "100%",
+                        padding: 0,
+                        margin: 0,
+                      }}
+                      placeholder="add name"
+                    ></Input>
+                  </Td>
 
-              <Td style={{ padding: 0, margin: 0 }}>
-                <Input
-                  style={{ borderRadius: 0, padding: 0, margin: 0 }}
-                  placeholder="add notes"
-                ></Input>
-              </Td>
+                  <Td style={{ padding: 0, margin: 0 }}>
+                    <Input
+                      style={{ borderRadius: 0, padding: 0, margin: 0 }}
+                      placeholder="add notes"
+                    ></Input>
+                  </Td>
 
-              <Td style={{ padding: 0, margin: 0 }}>
-                <Input
-                  style={{ borderRadius: 0, padding: 0, margin: 0 }}
-                  placeholder="add assignee"
-                ></Input>
-              </Td>
+                  <Td style={{ padding: 0, margin: 0 }}>
+                    <Input
+                      style={{ borderRadius: 0, padding: 0, margin: 0 }}
+                      placeholder="add assignee"
+                    ></Input>
+                  </Td>
 
-              <Td style={{ padding: 0, margin: 0 }}>
-                <select
-                  style={{ width: "100%", height: "100%", border: "none" }}
-                >
-                  <option value="Not started">Not started</option>
-                  <option value="In progress">In progress</option>
-                </select>
-              </Td>
-            </Tr>
-          </Tbody>
-        </Table>
-      </TableContainer>
+                  <Td style={{ padding: 0, margin: 0 }}>
+                    <select
+                      style={{ width: "100%", height: "100%", border: "none" }}
+                    >
+                      <option value="Not started">Not started</option>
+                      <option value="In progress">In progress</option>
+                      <option value="Completed">Completed</option>
+                    </select>
+                  </Td>
+                </Tr>
+              </Tbody>
+            </Table>
+          </TableContainer>
 
-      <Button
-        left={"40px"}
-        p={"10px 30px"}
-        borderRadius={"30px"}
-        position={"fixed"}
-        top="550px"
-        onClick={handleAdd}
-      >
-        <SmallAddIcon />
-        Add..
-      </Button>
+          <Button
+            left={"40px"}
+            p={"10px 30px"}
+            borderRadius={"30px"}
+            position={"fixed"}
+            top="550px"
+            onClick={postdata}
+          >
+            <SmallAddIcon />
+            {/* <Link to="/dashboard"> */}
+            Add..
+            {/* </Link> */}
+          </Button>
+        </div>
 
-      {/* <TodoSidebar /> */}
+        <TodoSidebar />
+      </Flex>
     </>
   );
 }

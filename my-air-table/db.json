@@ -1,0 +1,36 @@
+{
+  "posts": [
+    {
+      "name": "Papri",
+      "notes": "Saha",
+      "assignee": "West Bengal",
+      "select": "In progress",
+      "status": false,
+      "id": 2
+    },
+    {
+      "name": "Prabhat",
+      "notes": "Kumar",
+      "assignee": "Saha",
+      "select": "In progress",
+      "status": false,
+      "id": 3
+    },
+    {
+      "name": "Mrinmoy",
+      "notes": "Mondal",
+      "assignee": "Math",
+      "select": "In progress",
+      "status": false,
+      "id": 4
+    },
+    {
+      "name": "Riya",
+      "notes": "Saha",
+      "assignee": "Eng",
+      "select": "Completed",
+      "status": false,
+      "id": 5
+    }
+  ]
+}
