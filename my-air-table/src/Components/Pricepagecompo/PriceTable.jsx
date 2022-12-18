@@ -80,15 +80,6 @@ export default function PriceTable() {
             </th>
           </tr>
         </thead>
-        {/* <tfoot>
-    <tr>
-      <th>Footer Cell</th>
-      <th>Footer Cell</th>
-      <th>Footer Cell</th>
-      <th>Footer Cell</th>
-      <th>Footer Cell</th>
-    </tr>
-  </tfoot> */}
         <tbody>
           <tr>
             <th>Fundamentals</th>

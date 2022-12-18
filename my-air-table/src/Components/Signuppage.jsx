@@ -16,8 +16,6 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-// import TimeTable from "../images/TimeTable.jpg";
 import { useNavigate } from "react-router-dom";
 
 export default function SignupCard() {
@@ -108,12 +106,6 @@ export default function SignupCard() {
                   />
                 </FormControl>
               </Box>
-              {/* <Box>
-                  <FormControl id="lastName">
-                    <FormLabel>Last Name</FormLabel>
-                    <Input type="text" />
-                  </FormControl>
-                </Box> */}
             </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Work Email</FormLabel>
@@ -131,15 +123,6 @@ export default function SignupCard() {
                   onChange={(e) => setPassword(e.target.value)}
                   type="password"
                 />
-                {/* <InputRightElement h={'full'}>
-                    <Button
-                      variant={'ghost'}
-                      onClick={() =>
-                        setShowPassword((showPassword) => !showPassword)
-                      }>
-                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                    </Button>
-                  </InputRightElement> */}
               </InputGroup>
             </FormControl>
             <Stack spacing={10} pt={2}>

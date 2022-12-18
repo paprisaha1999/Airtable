@@ -13,7 +13,6 @@ import {
   Tag,
   VStack,
 } from "@chakra-ui/react";
-import Footer from "../Components/Footer";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 export default function Home() {
@@ -27,6 +26,7 @@ export default function Home() {
           direction={{ base: "column", md: "row" }}
           width="80%"
           margin={"auto"}
+          mt={"-2"}
         >
           <Stack flex={1} spacing={{ base: 5, md: 10 }}>
             <Heading
@@ -542,8 +542,6 @@ export default function Home() {
           </div>
         </VStack>
       </Container>
-
-      <Footer />
     </>
   );
 }

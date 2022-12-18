@@ -20,7 +20,6 @@ const MainDashCompo = () => {
     login();
   }, []);
 
-  // let data;
   const login = async () => {
     try {
       let res = await fetch(`http://localhost:8080/posts`);
@@ -32,14 +31,6 @@ const MainDashCompo = () => {
     }
   };
   // console.log(Data);
-
-  // const handleDelete = (id) => {
-  //   console.log(id);
-  //   const todoAfterDeletion = Data.filter((todos) => {
-  //     return todos.id !== id;
-  //   });
-  //   setData(todoAfterDeletion);
-  // };
 
   return (
     <div style={{ width: "130%" }}>

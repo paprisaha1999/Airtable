@@ -95,7 +95,6 @@ export default function Pricecards() {
             <ListItem>
               <CheckIcon color="green.500" />1 sync integration
             </ListItem>
-            {/* You can also use custom icons from react-icons */}
             <ListItem>
               <CheckIcon color="green.500" />
               2GB of attachments per base

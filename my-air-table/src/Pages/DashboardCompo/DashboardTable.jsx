@@ -12,7 +12,7 @@ import {
   PopoverAnchor,
 } from "@chakra-ui/react";
 
-const DashboardTable = (data, handleDelete) => {
+const DashboardTable = (data) => {
   // console.log(name)
   console.log(data);
 
@@ -58,7 +58,6 @@ const DashboardTable = (data, handleDelete) => {
           </PopoverBody>
         </PopoverContent>
       </Popover>
-      {/* <Button onClick={() => handleDelete(data.id)}>DELETE</Button> */}
     </VStack>
   );
 };

@@ -13,7 +13,6 @@ import React from "react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 export default function Sidebar({ isOpen, onClose, onOpen }) {
-  // const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
   return (

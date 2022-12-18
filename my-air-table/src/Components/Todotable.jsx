@@ -28,16 +28,12 @@ import {
 } from "@chakra-ui/icons";
 import TodoSidebar from "./TodoSidebar";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 export default function Todotable() {
-  // const [todo, setTodo] = useState([]);
   const [name, setName] = useState("");
   const [notes, setNotes] = useState("");
   const [assignee, setAssignee] = useState("");
   const [select, setSelect] = useState("");
-  // const navigate = useNavigate();
-  // const { name, isAuth, logoutUser } = useContext(AuthContext);
 
   const showText = (event) => {
     setName(event.target.value);
@@ -89,6 +85,10 @@ export default function Todotable() {
     } catch (error) {
       console.log(error);
     }
+    setName("");
+    setAssignee("");
+    setNotes("");
+    setSelect("");
   };
 
   return (
@@ -398,9 +398,7 @@ export default function Todotable() {
             onClick={postdata}
           >
             <SmallAddIcon />
-            {/* <Link to="/dashboard"> */}
             Add..
-            {/* </Link> */}
           </Button>
         </div>
 
